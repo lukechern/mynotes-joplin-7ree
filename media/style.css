@@ -1,0 +1,845 @@
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+    overflow: hidden; /* 防止整体滚动 */
+}
+
+/* 标题栏样式 */
+.title-bar_7ree {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--vscode-sideBar-background, var(--vscode-editorGroupHeader-tabsBackground));
+    border-bottom: 1px solid var(--vscode-editorWidget-border, rgba(180, 180, 180, 0.7));
+    flex-shrink: 0; /* 防止标题栏收缩 */
+}
+
+.title-text_7ree {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--vscode-sideBarTitle-foreground);
+    user-select: none; /* 禁止文字选择 */
+}
+
+.title-actions_7ree {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* 标题栏操作按钮样式 */
+.title-action-button_7ree {
+    background: none;
+    border: none;
+    color: var(--vscode-foreground);
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    padding: 0;
+    font-size: 16px;
+    user-select: none; /* 禁止文字选择 */
+    transition: all 0.2s ease-in-out;
+}
+
+.title-action-button_7ree:hover {
+    background-color: var(--vscode-toolbar-hoverBackground);
+    color: var(--vscode-editor-foreground);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.title-action-button_7ree[title]:hover:after {
+    content: attr(title);
+    position: absolute;
+    background: var(--vscode-editorHoverWidget-background);
+    color: var(--vscode-editorHoverWidget-foreground);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    top: 100%;
+    margin-top: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border: 1px solid var(--vscode-editorHoverWidget-border);
+}
+
+.notes-container_7ree {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 防止整体溢出 */
+}
+
+.notes-header_7ree {
+    padding: 6px 8px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--vscode-editorWidget-border, rgba(180, 180, 180, 0.7));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; /* 防止头部收缩 */
+}
+
+.header-title_7ree {
+    /* 标题样式 */
+}
+
+.import-file-button_7ree {
+    background: none;
+    border: none;
+    color: var(--vscode-foreground);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+}
+
+.import-file-button_7ree:hover {
+    color: var(--vscode-focusBorder);
+}
+
+.file-tabs-container_7ree {
+    display: flex;
+    flex-wrap: nowrap; /* 不换行，允许滚动 */
+    align-items: center; /* 垂直居中对齐标签和按钮 */
+    overflow-x: auto; /* 水平滚动 */
+    overflow-y: hidden;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--vscode-editorWidget-border, rgba(180, 180, 180, 0.7));
+    background-color: var(--vscode-sideBar-background, var(--vscode-editorGroupHeader-tabsBackground));
+    flex-shrink: 0; /* 防止标签容器收缩 */
+}
+
+.file-tab_7ree {
+    padding: 4px 8px;
+    margin-right: 4px;
+    border: 1px solid var(--vscode-tab-border, transparent); /* 默认有边框，但可能是透明的 */
+    border-bottom: none; /* 底部边框由容器提供 */
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
+    font-size: 9.6px; /* 减少20%，从12px减至9.6px */
+    white-space: nowrap; /* 防止文件名换行 */
+    background-color: var(--vscode-tab-inactiveBackground);
+    color: var(--vscode-tab-inactiveForeground);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    user-select: none; /* 禁止文字选择 */
+    transition: all 0.2s ease-in-out; /* 平滑过渡效果 */
+}
+
+.file-tab_7ree.active_7ree {
+    background-color: var(--vscode-tab-activeBackground, var(--vscode-editor-background));
+    color: var(--vscode-tab-activeForeground);
+    border-color: var(--vscode-tab-activeBorder, var(--vscode-editorWidget-border, rgba(180, 180, 180, 0.7)));
+    transition: all 0.2s ease-in-out; /* 添加过渡效果保持一致 */
+}
+
+/* 添加活动标签的悬停样式 */
+.file-tab_7ree.active_7ree:hover {
+    border-color: var(--vscode-focusBorder, rgba(180, 180, 180, 0.9)); /* 高亮边框 */
+    color: var(--vscode-tab-activeForeground); /* 保持原有颜色，避免跳动 */
+    background-color: var(--vscode-tab-activeBackground, var(--vscode-editor-background)); /* 保持背景色一致 */
+}
+
+.tab-name_7ree {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer; /* 保持指针提示可点击 */
+    user-select: none; /* 禁止文字选择 */
+    transition: color 0.2s ease-in-out; /* 添加颜色过渡效果 */
+}
+
+/* 增强标签名称悬停效果 */
+.tab-name_7ree:hover {
+    color: var(--vscode-editor-foreground); /* 使用更亮/更清晰的颜色 */
+}
+
+.tab-close_7ree {
+    font-size: 14px;
+    line-height: 14px;
+    height: 14px;
+    width: 14px;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    color: var(--vscode-tab-inactiveForeground);
+    opacity: 0.7;
+    cursor: pointer;
+    z-index: 10;
+    padding: 1px;
+    font-weight: bold;
+}
+
+.tab-close_7ree:hover {
+    background-color: transparent;
+    color: var(--vscode-errorForeground, #f44);
+    opacity: 1;
+    transform: scale(1.1);
+    font-weight: bolder;
+}
+
+.file-tab_7ree.active_7ree .tab-close_7ree {
+    color: var(--vscode-tab-activeForeground);
+    opacity: 0.9;
+}
+
+.file-tab_7ree.active_7ree .tab-close_7ree:hover {
+    background-color: transparent;
+    color: var(--vscode-errorForeground, #f44);
+    opacity: 1;
+    font-weight: bolder;
+}
+
+.file-tab_7ree:hover {
+    background-color: var(--vscode-tab-hoverBackground); /* 使用主题悬停背景色 */
+    color: var(--vscode-tab-hoverForeground); /* 使用主题悬停前景色 */
+    border-color: var(--vscode-focusBorder, rgba(180, 180, 180, 0.9)); /* 高亮边框 */
+    transition: all 0.2s ease-in-out; /* 平滑过渡效果 */
+}
+
+.notes-content-container_7ree {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden; /* 防止容器溢出，内部滚动由textarea管理 */
+    min-height: 0; /* 确保flex容器正确计算高度 */
+}
+
+.line-numbers_7ree {
+    padding: 8px 4px 8px 8px;
+    text-align: right;
+    background-color: var(--vscode-editorGutter-background);
+    color: rgba(180, 180, 180, 0.7);
+    user-select: none;
+    border-right: 1px solid #454545;
+    overflow-y: hidden;
+    min-width: 40px;
+    max-height: 100%; /* 确保行号不超出容器 */
+    box-sizing: border-box;
+    font-size: var(--vscode-font-size);
+    line-height: 1.5;
+    font-family: var(--vscode-editor-font-family, monospace);
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.notes-textarea_7ree {
+    flex: 1;
+    resize: none;
+    border: none;
+    border-right: 1px solid var(--vscode-editorWidget-border, rgba(180, 180, 180, 0.7));
+    padding: 8px;
+    margin-right: 3px;
+    box-sizing: border-box;
+    font-family: var(--vscode-editor-font-family, monospace);
+    font-size: var(--vscode-font-size);
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+    outline: none;
+    line-height: 1.5;
+    overflow-y: auto;
+    max-height: 100%; /* 确保textarea不超出容器 */
+    height: 100%; /* 填充整个容器高度 */
+}
+
+/* 覆盖textarea激活状态的默认橙色边框 */
+.notes-textarea_7ree:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.notes-status-bar_7ree {
+    padding: 4px 8px;
+    font-size: 12px;
+    border-top: 1px solid var(--vscode-editorWidget-border, rgba(180, 180, 180, 0.7));
+    color: var(--vscode-descriptionForeground);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; /* 防止状态栏收缩 */
+    position: sticky; /* 固定在底部 */
+    bottom: 0;
+    background-color: var(--vscode-editor-background); /* 确保背景色 */
+    z-index: 10; /* 确保在最上层 */
+}
+
+.notes-status-text_7ree {
+    /* 保持左对齐 */
+}
+
+.manual-save-button_7ree {
+    background-color: #293030;
+    color: #878F8C;
+    border: 1px solid var(--vscode-button-border, transparent);
+    padding: 2px 8px;
+    cursor: pointer;
+    border-radius: 2px;
+    user-select: none; /* 禁止文字选择 */
+}
+
+.manual-save-button_7ree:hover {
+    background-color: var(--vscode-button-hoverBackground);
+    color: var(--vscode-button-foreground, #ffffff); /* 悬停时字体颜色变亮 */
+}
+
+/* 样式化新的导入按钮 */
+.import-button-in-tabs_7ree {
+    background: none;
+    border: 1px solid var(--vscode-button-border, transparent);
+    color: var(--vscode-foreground);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 6px;
+    margin-left: 0; /* 修改：不再自动推到最右侧 */
+    line-height: 1;
+    height: 22px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    flex-shrink: 0; /* 防止按钮在空间不足时被压缩 */
+}
+
+.import-button-in-tabs_7ree:hover {
+    background-color: var(--vscode-button-hoverBackground);
+    border-color: var(--vscode-focusBorder);
+}
+
+/* 样式化打开文件按钮 */
+.open-file-button-in-tabs_7ree {
+    background: none;
+    border: 1px solid var(--vscode-button-border, transparent);
+    color: var(--vscode-foreground);
+    font-size: 18px; /* 与加号按钮保持一致 */
+    cursor: pointer;
+    padding: 0 6px;
+    margin-left: auto; /* 这将它推到右侧 */
+    margin-right: 4px; /* 在它和导入按钮之间添加一些间距 */
+    line-height: 1;
+    height: 22px; 
+    width: 22px; /* 添加固定宽度，与加号按钮保持一致 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    flex-shrink: 0; /* 防止按钮在空间不足时被压缩 */
+}
+
+.open-file-button-in-tabs_7ree:hover {
+    background-color: var(--vscode-button-hoverBackground);
+    border-color: var(--vscode-focusBorder);
+}
+
+.open-file-button-in-tabs_7ree.disabled_7ree {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.open-file-button-in-tabs_7ree.disabled_7ree:hover {
+    background: none;
+    border-color: transparent;
+}
+
+/* 新增：重命名对话框样式 */
+.rename-dialog_7ree {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* 与settings-dialog一致的半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.rename-dialog_7ree.visible_7ree {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.rename-dialog-content_7ree {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border, rgba(80, 80, 80, 0.8))); /* 更暗的边框颜色 */
+    border-radius: 4px;
+    padding: 15px;
+    min-width: 225px; /* 原300px，缩小25% */
+    max-width: 338px; /* 新增，基于原min-width * 1.5 * 0.75 估算 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.rename-dialog-content_7ree h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--vscode-editor-foreground);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+#rename_input_7ree {
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border, transparent); /* 确保只有这个边框定义 */
+    width: 100%; /* 让输入框宽度撑满其容器 */
+    padding: 6px;
+    margin-bottom: 15px;
+    box-sizing: border-box; /* 确保padding和border不增加宽度 */
+    outline: none; /* 移除可能的outline */
+    box-shadow: none; /* 移除可能的box-shadow */
+}
+
+#rename_input_7ree:focus {
+    border-color: var(--vscode-focusBorder); /* 与设置弹窗激活颜色一致 */
+    outline: none; /* 确保激活时也没有outline干扰 */
+    box-shadow: none; /* 确保激活时也没有box-shadow干扰 */
+}
+
+.rename-dialog-buttons_7ree {
+    display: flex;
+    justify-content: flex-end; /* 按钮组右对齐 */
+    gap: 8px;
+}
+
+.rename-dialog-buttons_7ree button {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    border: none;
+    padding: 4px 10px; 
+    border-radius: 2px;
+    cursor: pointer;
+    user-select: none; /* 禁止文字选择 */
+    position: relative; /* 确保按钮有正确的定位上下文 */
+    z-index: 1001; /* 确保按钮的z-index比对话框还高 */
+}
+
+.rename-dialog-buttons_7ree button:hover {
+    background-color: var(--vscode-button-secondaryHoverBackground);
+}
+
+#rename_confirm_btn_7ree {
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+}
+
+#rename_confirm_btn_7ree:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+.rename-dialog-shortcuts_7ree {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground);
+    text-align: right; /* 改为右对齐 */
+}
+
+/* 拖拽相关样式 */
+.file-tab_7ree.draggable_7ree {
+    cursor: grab;
+}
+
+.file-tab_7ree.dragging_7ree {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.file-tab_7ree.drag-over_7ree {
+    background-color: var(--vscode-listHoverBackground);
+}
+
+.file-tab_7ree.drag-over-left_7ree {
+    border-left: 2px solid var(--vscode-focusBorder);
+}
+
+.file-tab_7ree.drag-over-right_7ree {
+    border-right: 2px solid var(--vscode-focusBorder);
+}
+
+/* 状态区域样式 */
+#notes_status_7ree {
+    font-size: 12px;
+    padding: 2px 10px;
+    color: var(--vscode-statusBar-foreground);
+    background-color: var(--vscode-statusBar-background);
+    border-top: 1px solid var(--vscode-statusBar-border, var(--vscode-statusBar-background));
+    min-height: 22px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* 添加突出显示的状态样式 */
+.status-highlight_7ree {
+    background-color: var(--vscode-statusBarItem-warningBackground, var(--vscode-statusBar-background)) !important;
+    color: var(--vscode-statusBarItem-warningForeground, var(--vscode-statusBar-foreground)) !important;
+    font-weight: bold !important;
+}
+
+/* 更多操作按钮的样式 */
+.more-actions-button_7ree {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-foreground);
+    cursor: pointer;
+    margin-left: auto; /* 添加自动左边距，使按钮右对齐 */
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid transparent; /* 添加透明边框，与标签样式保持一致 */
+    transition: all 0.2s ease-in-out; /* 添加平滑过渡效果，与标签样式保持一致 */
+    font-size: 16px;
+    user-select: none; /* 禁止文字选择 */
+}
+
+.more-actions-button_7ree:hover {
+    background-color: var(--vscode-tab-hoverBackground); /* 使用与标签相同的悬停背景色 */
+    color: var(--vscode-tab-hoverForeground); /* 使用与标签相同的悬停前景色 */
+    border-color: var(--vscode-focusBorder, rgba(180, 180, 180, 0.9)); /* 添加与标签相同的高亮边框 */
+    font-weight: 500; /* 稍微加粗字体，与标签一致 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 添加轻微阴影增强立体感，与标签一致 */
+}
+
+/* 下拉菜单的样式 */
+.actions-dropdown_7ree {
+    z-index: 1020; /* 提高z-index以确保显示在最上层 */
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-panel-border);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: max-content; /* 使用max-content而非auto，更精确地适应内容 */
+    min-width: 120px; /* 减小最小宽度 */
+    padding: 4px 0;
+    overflow: hidden;
+    /* 不再使用相对定位，使用JavaScript和fixed定位 */
+}
+
+/* 下拉菜单项的样式 */
+.dropdown-item_7ree {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px; /* 左右padding减小，更紧凑 */
+    color: var(--vscode-foreground);
+    cursor: pointer;
+    transition: background-color 0.1s;
+    white-space: nowrap; /* 防止文本换行 */
+    user-select: none; /* 禁止文字选择 */
+}
+
+.dropdown-item_7ree:hover {
+    background-color: var(--vscode-list-hoverBackground);
+}
+
+.item-icon_7ree {
+    margin-right: 6px; /* 减小图标和文本之间的间距 */
+    font-size: 14px;
+    min-width: 14px; /* 确保图标固定宽度 */
+    text-align: center; /* 居中对齐图标 */
+}
+
+/* 主按钮样式 */
+.primary-button_7ree {
+    background-color: var(--vscode-button-background) !important;
+    color: var(--vscode-button-foreground) !important;
+}
+
+.primary-button_7ree:hover {
+    background-color: var(--vscode-button-hoverBackground) !important;
+}
+
+/* 设置对话框样式 */
+.settings-dialog_7ree {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* 半透明背景 */
+    display: none; /* 默认隐藏 */
+    justify-content: center;
+    align-items: center;
+    z-index: 1010; /* 比下拉菜单高 */
+}
+
+.settings-dialog-content_7ree {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-widget-border, var(--vscode-editorWidget-border, rgba(80, 80, 80, 0.8))); /* 更暗的边框颜色 */
+    border-radius: 5px;
+    padding: 20px;
+    min-width: 195px; /* 原260px，缩小25% */
+    max-width: 225px; /* 原300px, 缩小25% */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.settings-dialog-content_7ree h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--vscode-editor-foreground);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.settings-dialog-content_7ree div {
+    margin-bottom: 15px;
+}
+
+.settings-dialog-content_7ree label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--vscode-foreground);
+    font-size: 13px;
+}
+
+.settings-dialog-content_7ree input[type="text"] {
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border, transparent);
+    width: calc(100% - 12px); /* 恢复宽度并考虑padding */
+    padding: 6px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.settings-dialog-content_7ree input[type="text"]:focus {
+    border-color: var(--vscode-focusBorder);
+}
+
+/* 添加select元素的样式，与input保持一致 */
+.settings-dialog-content_7ree select {
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border, transparent);
+    width: 100%; /* 恢复宽度 */
+    padding: 6px;
+    border-radius: 3px;
+    outline: none;
+    height: 30px; /* 确保与input高度一致 */
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.settings-dialog-content_7ree select:focus {
+    border-color: var(--vscode-focusBorder);
+}
+
+.settings-dialog-buttons_7ree {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 0; /* 移除最后一个div的默认margin */
+}
+
+.settings-dialog-buttons_7ree button {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    border: none;
+    padding: 4px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    min-width: unset;
+    user-select: none; /* 禁止文字选择 */
+}
+
+.settings-dialog-buttons_7ree button:hover {
+    background-color: var(--vscode-button-secondaryHoverBackground);
+}
+
+/* 移除旧的独立按钮样式 */
+/* .import-button-in-tabs_7ree, .open-file-button-in-tabs_7ree { display: none !important; } */
+
+#close_confirm_message_7ree {
+    margin: 10px 0 15px;
+    font-size: 13px;
+    color: var(--vscode-editor-foreground);
+    word-break: break-word;
+}
+
+#error_message_7ree {
+    margin: 10px 0 15px;
+    font-size: 13px;
+    color: var(--vscode-editor-foreground);
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.key-icon_7ree {
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    margin: 0 2px;
+}
+
+.key-text_7ree {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 新增：Monaco编辑器容器样式 */
+.monaco-editor-container_7ree {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid var(--vscode-editorWidget-border, rgba(180, 180, 180, 0.7));
+    margin-right: 3px;
+    box-sizing: border-box;
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+}
+
+/* 自定义Monaco编辑器外观以匹配当前主题 */
+.monaco-editor .monaco-editor-background, 
+.monaco-editor .margin-view-overlays {
+    background-color: var(--vscode-editor-background) !important;
+}
+
+.monaco-editor .lines-content,
+.monaco-editor .view-line {
+    color: var(--vscode-editor-foreground) !important;
+}
+
+/* Monaco编辑器行号颜色和背景 */
+.monaco-editor .margin,
+.monaco-editor .margin-view-overlays {
+    background-color: var(--vscode-editorGutter-background, var(--vscode-editor-background)) !important;
+    color: var(--vscode-editorLineNumber-foreground, rgba(180, 180, 180, 0.7)) !important;
+}
+
+/* 活动行号颜色 */
+.monaco-editor .current-line ~ .line-numbers {
+    color: var(--vscode-editorLineNumber-activeForeground, var(--vscode-editor-foreground)) !important;
+}
+
+/* 选中文本的背景和前景色 */
+.monaco-editor .selected-text {
+    background-color: var(--vscode-editor-selectionBackground) !important;
+    color: var(--vscode-editor-selectionForeground, var(--vscode-editor-foreground)) !important;
+}
+
+/* 对于可能不再需要的样式，可以保留，也可以在确认功能正常后移除 */
+.line-numbers_7ree,
+.notes-textarea_7ree {
+    /* 这些样式现在可能不再使用，但保留以防回滚 */
+}
+
+/* 新的搜索条样式 */
+.search-bar_7ree {
+    display: none;
+    position: relative;
+    background-color: var(--vscode-editor-background);
+    border-bottom: 1px solid var(--vscode-editor-lineHighlightBorder);
+    padding: 5px;
+    z-index: 10;
+}
+
+.search-input-container_7ree {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search-input-container_7ree input {
+    flex-grow: 1;
+    padding: 6px 10px;
+    border: 1px solid var(--vscode-input-border, #ccc);
+    border-radius: 3px;
+    background-color: var(--vscode-input-background, #fff);
+    color: var(--vscode-input-foreground, #000);
+    font-size: 13px;
+    outline: none; /* 移除默认的 outline */
+}
+
+.search-input-container_7ree input:focus {
+    border-color: var(--vscode-focusBorder, #007fd4); /* 使用 VSCode 焦点边框颜色 */
+    box-shadow: none; /* 移除任何可能的默认或继承的 box-shadow */
+}
+
+.search-controls_7ree {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.search-controls_7ree button {
+    background: transparent;
+    border: none;
+    color: var(--vscode-editor-foreground);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    margin: 0 2px;
+}
+
+/* 修改关闭按钮样式 */
+.search-close-button_7ree {
+    background: transparent;
+    border: none;
+    color: var(--vscode-editor-foreground);
+    cursor: pointer;
+    font-size: 16px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.search-close-button_7ree:hover, 
+.search-controls_7ree button:hover {
+    background-color: var(--vscode-toolbar-hoverBackground);
+}
+
+.search-matches_7ree {
+    font-size: 12px;
+    color: var(--vscode-editor-foreground);
+    margin: 0 5px;
+}
+
+/* 箭头图标样式 */
+.search-arrow-icon_7ree {
+    width: 16px;
+    height: 16px;
+}
+
+/* 搜索匹配高亮 */
+.search-match_7ree {
+    background-color: rgba(255, 255, 0, 0.3);
+    border-radius: 2px;
+}
+
+.search-match-current_7ree {
+    background-color: rgba(255, 165, 0, 0.5);
+    border-radius: 2px;
+} 

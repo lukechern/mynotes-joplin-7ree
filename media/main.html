@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes</title>
+    <link rel="stylesheet" href="{{styleUri}}">
+    <script>
+        window.RESOURCES_BASE_URI_7ree = '{{resourcesBaseUri_7ree}}';
+    </script>
+    <script src="{{monacoEditorUri}}"></script>
+    <script src="{{scriptUri}}"></script>
+</head>
+<body>
+    <div class="notes-container_7ree">
+        <div id="file_tabs_container_7ree" class="file-tabs-container_7ree">
+            <!-- 标签将在这里动态生成 -->
+        </div>
+        
+        <!-- 修改搜索条结构 -->
+        <div id="search_bar_7ree" class="search-bar_7ree" style="display: none;">
+            <div class="search-input-container_7ree">
+                <button id="search_close_7ree" class="search-close-button_7ree" title="关闭">×</button>
+                <input type="text" id="search_input_7ree" placeholder="输入搜索关键词...">
+                <div class="search-controls_7ree">
+                    <button id="search_prev_7ree" title="上一个匹配 (Shift+Enter)">
+                        <img src="{{resourcesBaseUri_7ree}}/icons/dark/arrow-up.svg" class="search-arrow-icon_7ree" alt="上一个">
+                    </button>
+                    <button id="search_next_7ree" title="下一个匹配 (Enter)">
+                        <img src="{{resourcesBaseUri_7ree}}/icons/dark/arrow-down.svg" class="search-arrow-icon_7ree" alt="下一个">
+                    </button>
+                    <span id="search_matches_7ree" class="search-matches_7ree">0/0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="notes-content-container_7ree">
+            <div id="monaco_editor_container_7ree" class="monaco-editor-container_7ree"></div>
+        </div>
+        <div id="notes_status_bar_7ree" class="notes-status-bar_7ree">
+            <span id="notes_status_7ree" class="notes-status-text_7ree">上次保存: 无</span>
+            <button id="manual_save_button_7ree" class="manual-save-button_7ree">保存</button>
+        </div>
+    </div>
+
+    <script>
+        // 确定当前主题是暗黑还是明亮
+        function updateThemeImages() {
+            const isDarkTheme = document.body.classList.contains('vscode-dark');
+            const themeFolder = isDarkTheme ? 'dark' : 'light';
+            
+            // 更新上一个/下一个箭头图标
+            const upArrow = document.querySelector('#search_prev_7ree img');
+            const downArrow = document.querySelector('#search_next_7ree img');
+            
+            if (upArrow) {
+                upArrow.src = window.RESOURCES_BASE_URI_7ree + '/icons/' + themeFolder + '/arrow-up.svg';
+            }
+            if (downArrow) {
+                downArrow.src = window.RESOURCES_BASE_URI_7ree + '/icons/' + themeFolder + '/arrow-down.svg';
+            }
+        }
+        
+        // 初始化时设置一次
+        document.addEventListener('DOMContentLoaded', updateThemeImages);
+        
+        // 监听主题变化
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    updateThemeImages();
+                }
+            });
+        });
+        
+        observer.observe(document.body, { attributes: true });
+    </script>
+</body>
+</html> 

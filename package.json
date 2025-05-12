@@ -1,0 +1,136 @@
+{
+  "name": "mynotes-7ree",
+  "displayName": "备忘笔记MyNotes",
+  "description": "轻量级的VSCode笔记扩展📑支持多文本格式、自动保存和快速搜索",
+  "version": "0.0.127",
+  "publisher": "7ree",
+  "icon": "resources/logo_7ree.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukechern/mynotes-7ree"
+  },
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:mynotes-7ree.notesView",
+    "onCommand:mynotes-7ree.importFile",
+    "onCommand:mynotes-7ree.openFileExternally",
+    "onCommand:mynotes-7ree.openSettings",
+    "onCommand:mynotes-7ree.search"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mynotes-7ree.saveNotes",
+        "title": "Save Notes"
+      },
+      {
+        "command": "mynotes-7ree.loadNotes",
+        "title": "Load Notes"
+      },
+      {
+        "command": "mynotes-7ree.importFile",
+        "category": "MyNotes",
+        "title": "导入文件",
+        "icon": {
+          "light": "resources/icons/light/plus-large.svg",
+          "dark": "resources/icons/dark/plus-large.svg"
+        }
+      },
+      {
+        "command": "mynotes-7ree.openFileExternally",
+        "category": "MyNotes",
+        "title": "vsCode主窗口打开",
+        "icon": {
+          "light": "resources/icons/light/external-large.svg",
+          "dark": "resources/icons/dark/external-large.svg"
+        }
+      },
+      {
+        "command": "mynotes-7ree.search",
+        "category": "MyNotes",
+        "title": "搜索",
+        "icon": {
+          "light": "resources/icons/light/search-large.svg",
+          "dark": "resources/icons/dark/search-large.svg"
+        }
+      },
+      {
+        "command": "mynotes-7ree.openSettings",
+        "category": "MyNotes",
+        "title": "参数设置",
+        "icon": {
+          "light": "resources/icons/light/gear-large.svg",
+          "dark": "resources/icons/dark/gear-large.svg"
+        }
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mynotes-7ree",
+          "title": "备忘&ToDo",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "mynotes-7ree": [
+        {
+          "id": "mynotes-7ree.notesView",
+          "name": "备忘&ToDo",
+          "type": "webview"
+        }
+      ]
+    },
+    "viewsActions": {
+      "mynotes-7ree.notesView": []
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "mynotes-7ree.importFile",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "mynotes-7ree.openFileExternally",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mynotes-7ree.search",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@3"
+        },
+        {
+          "command": "mynotes-7ree.openSettings",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@4"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.91.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.25.1"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.41.0"
+  }
+}

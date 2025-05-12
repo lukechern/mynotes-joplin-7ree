@@ -1,0 +1,26 @@
+{
+  "lastActiveId": "file_1746892421608_7ree",
+  "files": [
+    {
+      "id": "default_notes_7ree",
+      "name": "备忘录",
+      "scrollTopRatio": "bottom",
+      "scrollPosition": "bottom",
+      "viewState": "{\"cursorState\":[{\"inSelectionMode\":false,\"selectionStart\":{\"lineNumber\":1,\"column\":1},\"position\":{\"lineNumber\":1,\"column\":1}}],\"viewState\":{\"scrollLeft\":0,\"firstPosition\":{\"lineNumber\":1,\"column\":1},\"firstPositionDeltaTop\":0},\"contributionsState\":{\"editor.contrib.wordHighlighter\":false,\"editor.contrib.folding\":{\"lineCount\":13,\"provider\":\"indent\",\"foldedImports\":false}}}"
+    },
+    {
+      "id": "file_1746892421608_7ree",
+      "name": "aieditor_7ree_log.txt",
+      "path": "f:\\AppDocument_7ree\\log\\aieditor_7ree_log.txt",
+      "viewState": "{\"cursorState\":[{\"inSelectionMode\":true,\"selectionStart\":{\"lineNumber\":56,\"column\":15},\"position\":{\"lineNumber\":55,\"column\":1}}],\"viewState\":{\"scrollLeft\":0,\"firstPosition\":{\"lineNumber\":41,\"column\":1},\"firstPositionDeltaTop\":-3},\"contributionsState\":{\"editor.contrib.wordHighlighter\":false,\"editor.contrib.folding\":{\"lineCount\":3676,\"provider\":\"indent\",\"foldedImports\":false}}}"
+    }
+  ],
+  "uiSettings": {
+    "fontFamily": "",
+    "fontSize": "12px",
+    "color": "",
+    "backgroundColor": "",
+    "selectionBackground": "",
+    "autoSaveInterval": 10
+  }
+}
