@@ -2,7 +2,7 @@
   "name": "mynotes-7ree",
   "displayName": "备忘笔记MyNotes",
   "description": "轻量级的VSCode笔记扩展📑支持多文本格式、自动保存和快速搜索",
-  "version": "0.0.127",
+  "version": "0.0.128",
   "publisher": "7ree",
   "icon": "resources/logo_7ree.png",
   "repository": {

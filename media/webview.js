@@ -87,8 +87,38 @@ document.addEventListener('DOMContentLoaded', () => {
         manualSaveButton.addEventListener('click', () => {
             console.log('手动保存按钮点击');
             saveCurrentContent(false); // false表示不是因为切换标签触发的
+            
+            // 手动保存成功提示
+            showStatusMessage('文件手动保存成功');
+            
+            // 添加保存成功视觉反馈
+            manualSaveButton.classList.add('save-success_7ree');
+            setTimeout(() => {
+                manualSaveButton.classList.remove('save-success_7ree');
+            }, 1000); // 1秒后移除样式
         });
     }
+    
+    // 添加全局键盘事件，监听Ctrl+S快捷键
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault(); // 阻止默认的浏览器保存行为
+            console.log('检测到Ctrl+S快捷键');
+            saveCurrentContent(false);
+            
+            // 手动保存成功提示
+            showStatusMessage('文件手动保存成功');
+            
+            // 添加保存成功视觉反馈
+            const manualSaveButton = document.getElementById('manual_save_button_7ree');
+            if (manualSaveButton) {
+                manualSaveButton.classList.add('save-success_7ree');
+                setTimeout(() => {
+                    manualSaveButton.classList.remove('save-success_7ree');
+                }, 1000); // 1秒后移除样式
+            }
+        }
+    });
     
     // 新增：全局点击事件处理 - 点击下拉菜单外部时关闭菜单
     document.addEventListener('click', (event) => {
@@ -212,6 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollSaveTimeout_7ree = setTimeout(() => {
                     saveScrollPosition();
                 }, 1000); // 滚动停止1秒后保存位置
+            });
+            
+            // 监听编辑器失去焦点事件，自动保存内容
+            editor_7ree.onDidBlurEditorWidget(() => {
+                console.log('编辑器失去焦点，自动保存内容');
+                saveCurrentContent(false);
             });
             
             // 监听编辑器主题变化
@@ -2191,16 +2227,19 @@ function createRenameDialog_7ree() {
         try {
             const statusElement = document.getElementById('notes_status_7ree');
             if (statusElement) {
-                statusElement.textContent = message;
-                statusElement.style.backgroundColor = '';
-                statusElement.style.color = '';
-                statusElement.style.padding = '';
+                // 备份原始文本
+                const originalText = statusElement.textContent;
                 
-                // 3秒后恢复状态栏
+                // 设置新消息
+                statusElement.textContent = message;
+                statusElement.style.color = 'var(--vscode-notificationsInfoIcon-foreground, #75beff)';
+                statusElement.style.fontWeight = 'bold';
+                
+                // 3秒后恢复原始状态
                 setTimeout(() => {
-                    statusElement.style.backgroundColor = '';
+                    statusElement.textContent = originalText;
                     statusElement.style.color = '';
-                    statusElement.style.padding = '';
+                    statusElement.style.fontWeight = '';
                 }, 3000);
             }
         } catch (err) {

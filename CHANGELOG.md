@@ -1,6 +1,19 @@
 # MyNotes-7ree 更新日志 🚀
 # MyNotes-7ree Changelog 🚀
 
+## [0.0.128]
+
+### ✨ 新功能
+### ✨ New Features
+- 添加了文档编辑快捷键支持：现在可以使用Ctrl+S保存文档
+- Added document editing shortcut support: now you can use Ctrl+S to save documents
+- 为保存按钮添加了悬停提示，显示"保存 (Ctrl+S)"快捷键信息
+- Added a hover tooltip to the save button, displaying "Save (Ctrl+S)" shortcut information
+- 添加了保存成功的状态栏通知，提供更直观的反馈
+- Added status bar notification upon successful save, providing more intuitive feedback
+- 实现编辑器失去焦点时自动保存功能，减少内容丢失风险
+- Implemented automatic saving when the editor loses focus, reducing the risk of losing content
+
 ## [0.0.127]
 
 ### 🔧 功能优化
@@ -267,7 +280,7 @@
 - 修复了恢复编辑器滚动位置时行号定位不准确的问题
 - Fixed the issue of inaccurate line number positioning when restoring editor scroll position.
 - 重写了行号定位逻辑，使用精确控制滚动位置的方式代替原来的`revealLine`方法
-- Rewrote the line number positioning logic, using precise scroll position control instead of the original `revealLine` method.
+- Rewritten the line number positioning logic, using precise scroll position control instead of the original `revealLine` method.
 - 确保记录的行号和还原时显示的行号完全一致，解决了之前有偏差的问题
 - Ensured that the recorded line number and the displayed line number upon restoration are completely consistent, resolving previous deviation issues.
 - 通过直接控制编辑器内部滚动控制器实现精确滚动位置设置

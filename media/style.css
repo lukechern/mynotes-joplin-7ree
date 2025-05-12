@@ -293,11 +293,50 @@ body {
     cursor: pointer;
     border-radius: 2px;
     user-select: none; /* 禁止文字选择 */
+    position: relative; /* 为悬停提示定位 */
+    transition: background-color 0.2s, color 0.2s; /* 添加过渡效果 */
 }
 
 .manual-save-button_7ree:hover {
     background-color: var(--vscode-button-hoverBackground);
     color: var(--vscode-button-foreground, #ffffff); /* 悬停时字体颜色变亮 */
+}
+
+/* 替换原有的title提示，改用data-tooltip自定义属性 */
+.manual-save-button_7ree[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 5px;
+    padding: 5px 8px;
+    background-color: var(--vscode-tooltip-background, #252526);
+    color: var(--vscode-tooltip-foreground, #cccccc);
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* 添加保存成功反馈样式 */
+.manual-save-button_7ree.save-success_7ree {
+    background-color: var(--vscode-button-hoverBackground);
+    color: var(--vscode-button-foreground, #ffffff);
+    animation: saveFlash_7ree 1s;
+}
+
+/* 保存成功闪烁动画 */
+@keyframes saveFlash_7ree {
+    0% {
+        background-color: var(--vscode-button-hoverBackground);
+        color: var(--vscode-button-foreground, #ffffff);
+    }
+    100% {
+        background-color: #293030;
+        color: #878F8C;
+    }
 }
 
 /* 样式化新的导入按钮 */
