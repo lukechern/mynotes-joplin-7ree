@@ -1,0 +1,339 @@
+.settings-tabs_7ree {
+    display: flex;
+    border-bottom: 1px solid var(--vscode-settings-headerBorder);
+    margin-bottom: 15px;
+}
+
+.settings-tab-btn_7ree {
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: var(--vscode-tab-inactiveForeground);
+    outline: none;
+}
+
+.settings-tab-btn_7ree.active_7ree {
+    color: var(--vscode-tab-activeForeground);
+    border-bottom: 2px solid var(--vscode-tab-activeBorder);
+}
+
+.settings-tab-content_7ree {
+    display: none;
+}
+
+.settings-tab-content_7ree.active_7ree {
+    display: block;
+}
+
+.hidden-color-input_7ree {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.color-picker-container_7ree {
+    display: flex;
+    align-items: center;
+}
+
+.color-preview_7ree {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--vscode-input-border, #ccc);
+    border-radius: 4px;
+    cursor: pointer;
+    transform: scale(0.8); /* 缩小色块尺寸 */
+}
+
+.settings-buttons_7ree {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.settings-cancel-btn_7ree { /* ID选择器优先于类选择器 */
+    background-color: var(--vscode-button-secondaryBackground) !important;
+    color: var(--vscode-button-secondaryForeground) !important;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.settings-cancel-btn_7ree:hover {
+    background-color: var(--vscode-button-secondaryHoverBackground) !important;
+}
+
+.settings-save-btn_7ree { /* ID选择器优先于类选择器 */
+    background-color: var(--vscode-button-background) !important;
+    color: var(--vscode-button-foreground) !important;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.settings-save-btn_7ree:hover {
+    background-color: var(--vscode-button-hoverBackground) !important;
+}
+
+.settings-shortcuts_7ree {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--vscode-descriptionForeground);
+    text-align: right;
+}
+
+.key-icon_7ree {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+/* 缩小颜色选择器尺寸 */
+.color-field_7ree input[type="color"] {
+    transform: scale(0.8);
+    transform-origin: left center;
+}
+
+/* 自定义下拉选择框样式 */
+.settings-select_7ree {
+    background: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+    padding: 4px 6px;
+    border-radius: 2px;
+    min-width: 120px;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+}
+
+.settings-select_7ree:focus {
+    outline-color: var(--vscode-focusBorder);
+}
+
+.settings-field_7ree {
+    margin-bottom: 10px;
+}
+
+.settings-field_7ree label {
+    display:flex;
+    align-items: center;
+}
+
+/* 帮助图标样式 */
+.help-icon_7ree {
+    display: inline-flex;
+    margin-left: 5px;
+    cursor: help;
+    vertical-align: middle;
+    color: var(--vscode-descriptionForeground);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    position: relative;
+}
+
+.help-icon_7ree:hover {
+    opacity: 1;
+}
+
+.question-icon_7ree {
+    width: 12px;
+    height: 12px;
+}
+
+/* 自定义提示框样式 */
+[data-tooltip] {
+    position: relative;
+}
+
+
+
+/* 移除title原生提示 */
+[title] {
+    position: relative;
+}
+
+[title]:hover::after {
+    display: none;
+}
+
+/* 设置对话框主容器 */
+.settings-dialog_7ree {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-content_7ree {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-widget-border);
+    border-radius: 6px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    /* width: 100%; */
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.settings-content_7ree h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--vscode-foreground);
+}
+
+/* 自定义开关样式 */
+.switch_7ree {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.switch_7ree input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider_7ree {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #888;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider_7ree::before {
+    position: absolute;
+    content: "";
+    height: 16px; width: 16px;
+    left: 2px; bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.switch_7ree input:checked + .slider_7ree {
+    background-color: var(--vscode-button-background);
+}
+
+.switch_7ree input:checked + .slider_7ree::before {
+    transform: translateX(20px);
+}
+
+.slider_7ree::before {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Joplin测试连接功能样式 */
+.joplin-test-container_7ree {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.joplin-test-btn_7ree {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-foreground);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    align-self: flex-start;
+}
+
+/* .joplin-test-btn_7ree:hover {
+    background-color: var(--vscode-button-secondaryhoverBackground) !important;
+} */
+
+.joplin-test-result_7ree {
+    margin-top: 8px;
+    font-size: 12px;
+    padding: 5px 0;
+}
+
+.joplin-test-success_7ree {
+    color: #318234;
+}
+
+.joplin-test-error_7ree {
+    color: #f44336;
+}
+
+.joplin-test-loading_7ree {
+    color: #2196f3;
+}
+
+/* 设置保存消息提示样式 */
+.settings-message_7ree {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeInOut_7ree 3s ease;
+}
+
+.settings-message-success_7ree {
+    background-color: rgba(76, 175, 80, 0.9);
+    color: white;
+}
+
+.settings-message-error_7ree {
+    background-color: rgba(244, 67, 54, 0.9);
+    color: white;
+}
+
+@keyframes fadeInOut_7ree {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* 备份按钮相关样式 */
+.backup-success_7ree {
+    background-color: var(--vscode-notificationsSuccessIcon-foreground, #89d185) !important;
+    color: var(--vscode-editor-background, #1e1e1e) !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.backup-in-progress_7ree {
+    background-color: var(--vscode-statusBarItem-prominentBackground, #705697) !important;
+    color: var(--vscode-editor-background, #1e1e1e) !important;
+    animation: pulse_backup_7ree 1.5s infinite;
+}
+
+@keyframes pulse_backup_7ree {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.save-success_7ree {
+    background-color: var(--vscode-notificationsSuccessIcon-foreground, #89d185) !important;
+    color: var(--vscode-editor-background, #1e1e1e) !important;
+    transition: all 0.3s ease-in-out;
+}

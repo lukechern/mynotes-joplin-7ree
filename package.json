@@ -1,13 +1,13 @@
 {
-  "name": "mynotes-7ree",
-  "displayName": "备忘笔记MyNotes",
-  "description": "轻量级的VSCode笔记扩展📑支持多文本格式、自动保存和快速搜索",
-  "version": "0.0.128",
+  "name": "mynotes-joplin-7ree",
+  "displayName": "备忘笔记(joplin云笔记版)",
+  "description": "轻量级的VSCode笔记扩展📑支持joplin云和本地笔记。内容和状态可自动保存。",
+  "version": "0.2.1",
   "publisher": "7ree",
   "icon": "resources/logo_7ree.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lukechern/mynotes-7ree"
+    "url": "https://github.com/lukechern/mynotes-joplin-7ree"
   },
   "engines": {
     "vscode": "^1.91.0"
@@ -62,6 +62,24 @@
         }
       },
       {
+        "command": "mynotes-7ree.backupCurrentFile",
+        "category": "MyNotes",
+        "title": "备份当前文件",
+        "icon": {
+          "light": "resources/icons/light/save-large.svg",
+          "dark": "resources/icons/dark/save-large.svg"
+        }
+      },
+      {
+        "command": "mynotes-7ree.openFileFolder_7ree",
+        "category": "MyNotes",
+        "title": "打开文件所在文件夹",
+        "icon": {
+          "light": "resources/icons/light/folder-large.svg",
+          "dark": "resources/icons/dark/folder-large.svg"
+        }
+      },
+      {
         "command": "mynotes-7ree.openSettings",
         "category": "MyNotes",
         "title": "参数设置",
@@ -89,6 +107,20 @@
         }
       ]
     },
+    "menus": {
+      "view/title": [
+        {
+          "command": "mynotes-7ree.backupCurrentFile",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "mynotes-7ree.openSettings",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@2"
+        }
+      ]
+    },
     "viewsActions": {
       "mynotes-7ree.notesView": []
     },
@@ -100,19 +132,29 @@
           "group": "navigation@1"
         },
         {
-          "command": "mynotes-7ree.openFileExternally",
+          "command": "mynotes-7ree.search",
           "when": "view == mynotes-7ree.notesView",
           "group": "navigation@2"
         },
         {
-          "command": "mynotes-7ree.search",
+          "command": "mynotes-7ree.openFileExternally",
           "when": "view == mynotes-7ree.notesView",
           "group": "navigation@3"
         },
         {
-          "command": "mynotes-7ree.openSettings",
+          "command": "mynotes-7ree.backupCurrentFile",
           "when": "view == mynotes-7ree.notesView",
           "group": "navigation@4"
+        },
+        {
+          "command": "mynotes-7ree.openFileFolder_7ree",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@5"
+        },
+        {
+          "command": "mynotes-7ree.openSettings",
+          "when": "view == mynotes-7ree.notesView",
+          "group": "navigation@6"
         }
       ]
     }

@@ -1,6 +1,31 @@
 # MyNotes-7ree 更新日志 🚀
 # MyNotes-7ree Changelog 🚀
 
+## [0.2.1]
+### ✨ 新功能 / ✨ New Features
+- 新增Joplin云笔记支持，实现多端同步
+- Added Joplin cloud notes support for multi-device synchronization
+
+### 🔧 优化 / 🔧 Improvements
+- 优化云笔记加载速度，提升用户体验
+- Improved cloud notes loading speed for better user experience
+- 优化视图状态保存和恢复机制
+- Enhanced view state saving and restoration mechanism
+
+### 🐛 修复 / 🐛 Bug Fixes
+- 修复切换文件标签时视图状态丢失的问题
+- Fixed view state loss when switching file tabs
+- 修复云笔记同步时的状态更新问题
+- Fixed state update issues during cloud notes synchronization
+
+### 📝 其他 / 📝 Others
+- 更新依赖包版本
+- Updated dependency package versions
+- 优化代码结构，提升可维护性
+- Optimized code structure for better maintainability
+
+
+
 ## [0.0.128]
 
 ### ✨ 新功能
@@ -707,8 +732,8 @@
 
 ## ✨  0.0.58
 
-- 新增自动保存间隔设置功能，可在设置对话框中选择3秒到60秒的自动保存间隔
-- Added an auto-save interval setting feature; you can choose an auto-save interval from 3 to 60 seconds in the settings dialog.
+- 新增自动保存间隔设置功能，可在设置对话框中选择30秒到60秒的自动保存间隔
+- Added an auto-save interval setting feature; you can choose an auto-save interval from 30 to 60 seconds in the settings dialog.
 - 优化了文件变更检测的实现方式，使用自定义间隔进行检测
 - Optimized the implementation of file change detection, using a custom interval for detection.
 

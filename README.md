@@ -1,11 +1,24 @@
 # MyNotes-7ree - 让代码和笔记成为最佳拍档 📝✨
 # MyNotes-7ree - Make Code and Notes the Best Partners 📝✨
 
-> *"世界上最危险的生物不是鲨鱼，而是一个没有记笔记习惯的程序员。"* —— 某位AI智者
+> *"世界上最危险的生物不是鲨鱼，而是一个没有记笔记习惯的程序员。"* — 某位AI智者
 > *"The most dangerous creature in the world is not a shark, but a programmer who doesn't take notes."* — An AI Sage
 
-`MyNotes-7ree` 是一款为忙碌的开发者打造的 VSCode 扩展，它能让你在编写代码的同时，随手记录灵感、想法和待办事项。再也不用在 VSCode 和笔记软件之间疯狂切换了！👨‍💻✌️
-`MyNotes-7ree` is a VSCode extension designed for busy developers, allowing you to jot down ideas, inspirations, and to-dos while coding. No more frantic switching between VSCode and note-taking apps! 👨‍💻✌️
+`MyNotes-7ree (MyNotes-joplin-7ree)` 是一款为忙碌的开发者打造的 VSCode 扩展，它能让你在编写代码的同时，随手记录灵感、想法和待办事项。支持本地文件备忘录和Joplin云笔记，实现多端同步，再也不用在 VSCode 和笔记软件之间疯狂切换了！👨‍💻✌️☁️
+`MyNotes-7ree (MyNotes-joplin-7ree)` is a VSCode extension designed for busy developers, allowing you to jot down ideas, inspirations, and to-dos while coding. With support for both local file memos and Joplin cloud notes, enabling multi-device synchronization, you can finally say goodbye to frantic switching between VSCode and note-taking apps! 👨‍💻✌️☁️
+
+## ⚠️ 分支版本说明
+`MyNotes-joplin-7ree` 是在原始的 `MyNotes-7ree` 上创建的一个分支版本、主要新增了支持joplin云笔记的读、写流程和配置管理等功能。
+简单对比：
+- **MyNotes-7ree** 💻 仅支持本地文件备忘录，反应更迅捷。
+- **MyNotes-joplin-7ree** ☁️支持云笔记和本地文件备忘录，可同步移动等多端joplin，体验更方便；
+
+## ⚠️ Branch Version Description
+`MyNotes-joplin-7ree` is a branch version created from the original `MyNotes-7ree`, primarily adding support for Joplin cloud notes reading, writing, and configuration management.
+
+Quick comparison:
+- **MyNotes-7ree** 💻 Only supports local file memos, with faster response times.
+- **MyNotes-joplin-7ree** ☁️ Supports both cloud notes and local file memos, enabling synchronization across multiple devices via Joplin for a more convenient experience.
 
 ## ⚠️ 重要提示
 ## ⚠️ Important Notice
@@ -47,7 +60,7 @@
 ### 🧙‍♂️ Smart Operations, Hands-free
 
 - **自动保存** - 别担心忘记点击保存按钮，我们帮你记着！⏱️ 
-  - 可自定义保存时间间隔（3秒到60秒）
+  - 可自定义保存时间间隔（30秒到60秒）
   - 停止打字几秒后自动保存，就像有个小精灵在默默帮你点击保存按钮 🧚‍♂️
 - **Auto-save** - Don't worry about forgetting to click save, we've got you covered! ⏱️
   - Customizable save interval (3 to 60 seconds)

@@ -8,3 +8,6 @@ vsc-extension-quickstart.md
 **/*.map
 **/eslint.config.mjs
 **/.vscode-test.*
+node_modules/monaco-editor/dev
+node_modules/monaco-editor/esm/vs/language/typescript/ts.worker.js
+node_modules/monaco-editor/min/vs/language/typescript/tsWorker.js
