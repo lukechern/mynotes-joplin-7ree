@@ -285,6 +285,9 @@
                                 <div class="color-picker-container_7ree">
                                     <div class="color-preview_7ree" id="textColor_preview_7ree"></div>
                                     <input type="color" id="textColor_7ree" class="hidden-color-input_7ree">
+                                    <button type="button" class="color-clear-btn_7ree" id="textColor_clear_7ree" title="清空颜色">
+                                        <img src="${this._getIconPath(`${themeFolder_7ree}/color-clear_7ree.svg`)}" alt="清空" class="clear-icon_7ree">
+                                    </button>
                                 </div>
                             </div>
                             <div class="settings-field_7ree color-field_7ree">
@@ -292,6 +295,9 @@
                                 <div class="color-picker-container_7ree">
                                     <div class="color-preview_7ree" id="bgColor_preview_7ree"></div>
                                     <input type="color" id="bgColor_7ree" class="hidden-color-input_7ree">
+                                    <button type="button" class="color-clear-btn_7ree" id="bgColor_clear_7ree" title="清空颜色">
+                                        <img src="${this._getIconPath(`${themeFolder_7ree}/color-clear_7ree.svg`)}" alt="清空" class="clear-icon_7ree">
+                                    </button>
                                 </div>
                             </div>
                             <div class="settings-field_7ree color-field_7ree">
@@ -299,6 +305,9 @@
                                 <div class="color-picker-container_7ree">
                                     <div class="color-preview_7ree" id="selectionBg_preview_7ree"></div>
                                     <input type="color" id="selectionBg_7ree" class="hidden-color-input_7ree">
+                                    <button type="button" class="color-clear-btn_7ree" id="selectionBg_clear_7ree" title="清空颜色">
+                                        <img src="${this._getIconPath(`${themeFolder_7ree}/color-clear_7ree.svg`)}" alt="清空" class="clear-icon_7ree">
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -576,61 +585,139 @@
             // 文本颜色
             const textColorInput = settingsDialog_7ree.querySelector('#textColor_7ree');
             const textColorPreview = settingsDialog_7ree.querySelector('#textColor_preview_7ree');
+            const textColorClear = settingsDialog_7ree.querySelector('#textColor_clear_7ree');
             
             if (textColorInput && textColorPreview) {
                 // 更新预览色块
                 const updateTextColorPreview = () => {
-                    textColorPreview.style.backgroundColor = textColorInput.value;
+                    const isCleared = textColorInput.dataset.cleared === 'true';
+                    if (isCleared || !textColorInput.value || textColorInput.value === '#000000') {
+                        // 显示默认状态
+                        textColorPreview.style.backgroundColor = 'transparent';
+                        textColorPreview.style.border = '1px dashed #ccc';
+                        textColorPreview.title = '使用VSCode默认文本颜色';
+                    } else {
+                        textColorPreview.style.backgroundColor = textColorInput.value;
+                        textColorPreview.style.border = '1px solid #ccc';
+                        textColorPreview.title = textColorInput.value;
+                    }
                 };
                 
                 // 点击预览色块时打开颜色选择器
                 textColorPreview.addEventListener('click', () => {
+                    textColorInput.dataset.cleared = 'false'; // 清除清空标志
                     textColorInput.click();
                 });
                 
                 // 颜色变化时更新预览
-                textColorInput.addEventListener('input', updateTextColorPreview);
-                textColorInput.addEventListener('change', updateTextColorPreview);
+                textColorInput.addEventListener('input', () => {
+                    textColorInput.dataset.cleared = 'false'; // 清除清空标志
+                    updateTextColorPreview();
+                });
+                textColorInput.addEventListener('change', () => {
+                    textColorInput.dataset.cleared = 'false'; // 清除清空标志
+                    updateTextColorPreview();
+                });
+                
+                // 清空按钮事件
+                if (textColorClear) {
+                    textColorClear.addEventListener('click', () => {
+                        textColorInput.dataset.cleared = 'true'; // 设置清空标志
+                        updateTextColorPreview();
+                    });
+                }
             }
             
             // 背景颜色
             const bgColorInput = settingsDialog_7ree.querySelector('#bgColor_7ree');
             const bgColorPreview = settingsDialog_7ree.querySelector('#bgColor_preview_7ree');
+            const bgColorClear = settingsDialog_7ree.querySelector('#bgColor_clear_7ree');
             
             if (bgColorInput && bgColorPreview) {
                 // 更新预览色块
                 const updateBgColorPreview = () => {
-                    bgColorPreview.style.backgroundColor = bgColorInput.value;
+                    const isCleared = bgColorInput.dataset.cleared === 'true';
+                    if (isCleared || !bgColorInput.value || bgColorInput.value === '#000000') {
+                        // 显示默认状态
+                        bgColorPreview.style.backgroundColor = 'transparent';
+                        bgColorPreview.style.border = '1px dashed #ccc';
+                        bgColorPreview.title = '使用VSCode默认背景颜色';
+                    } else {
+                        bgColorPreview.style.backgroundColor = bgColorInput.value;
+                        bgColorPreview.style.border = '1px solid #ccc';
+                        bgColorPreview.title = bgColorInput.value;
+                    }
                 };
                 
                 // 点击预览色块时打开颜色选择器
                 bgColorPreview.addEventListener('click', () => {
+                    bgColorInput.dataset.cleared = 'false'; // 清除清空标志
                     bgColorInput.click();
                 });
                 
                 // 颜色变化时更新预览
-                bgColorInput.addEventListener('input', updateBgColorPreview);
-                bgColorInput.addEventListener('change', updateBgColorPreview);
+                bgColorInput.addEventListener('input', () => {
+                    bgColorInput.dataset.cleared = 'false'; // 清除清空标志
+                    updateBgColorPreview();
+                });
+                bgColorInput.addEventListener('change', () => {
+                    bgColorInput.dataset.cleared = 'false'; // 清除清空标志
+                    updateBgColorPreview();
+                });
+                
+                // 清空按钮事件
+                if (bgColorClear) {
+                    bgColorClear.addEventListener('click', () => {
+                        bgColorInput.dataset.cleared = 'true'; // 设置清空标志
+                        updateBgColorPreview();
+                    });
+                }
             }
             
             // 选择背景颜色
             const selectionBgInput = settingsDialog_7ree.querySelector('#selectionBg_7ree');
             const selectionBgPreview = settingsDialog_7ree.querySelector('#selectionBg_preview_7ree');
+            const selectionBgClear = settingsDialog_7ree.querySelector('#selectionBg_clear_7ree');
             
             if (selectionBgInput && selectionBgPreview) {
                 // 更新预览色块
                 const updateSelectionBgPreview = () => {
-                    selectionBgPreview.style.backgroundColor = selectionBgInput.value;
+                    const isCleared = selectionBgInput.dataset.cleared === 'true';
+                    if (isCleared || !selectionBgInput.value || selectionBgInput.value === '#000000') {
+                        // 显示默认状态
+                        selectionBgPreview.style.backgroundColor = 'transparent';
+                        selectionBgPreview.style.border = '1px dashed #ccc';
+                        selectionBgPreview.title = '使用VSCode默认选择背景色';
+                    } else {
+                        selectionBgPreview.style.backgroundColor = selectionBgInput.value;
+                        selectionBgPreview.style.border = '1px solid #ccc';
+                        selectionBgPreview.title = selectionBgInput.value;
+                    }
                 };
                 
                 // 点击预览色块时打开颜色选择器
                 selectionBgPreview.addEventListener('click', () => {
+                    selectionBgInput.dataset.cleared = 'false'; // 清除清空标志
                     selectionBgInput.click();
                 });
                 
                 // 颜色变化时更新预览
-                selectionBgInput.addEventListener('input', updateSelectionBgPreview);
-                selectionBgInput.addEventListener('change', updateSelectionBgPreview);
+                selectionBgInput.addEventListener('input', () => {
+                    selectionBgInput.dataset.cleared = 'false'; // 清除清空标志
+                    updateSelectionBgPreview();
+                });
+                selectionBgInput.addEventListener('change', () => {
+                    selectionBgInput.dataset.cleared = 'false'; // 清除清空标志
+                    updateSelectionBgPreview();
+                });
+                
+                // 清空按钮事件
+                if (selectionBgClear) {
+                    selectionBgClear.addEventListener('click', () => {
+                        selectionBgInput.dataset.cleared = 'true'; // 设置清空标志
+                        updateSelectionBgPreview();
+                    });
+                }
             }
         },
 
@@ -729,16 +816,67 @@
             if (fontFamilyInput) fontFamilyInput.value = currentSettings_7ree.fontFamily || '';
             if (fontSizeInput) fontSizeInput.value = currentSettings_7ree.fontSize || '';
             if (textColorInput) {
-                textColorInput.value = currentSettings_7ree.color || '#000000';
-                if (textColorPreview) textColorPreview.style.backgroundColor = textColorInput.value;
+                const hasTextColor = currentSettings_7ree.color && currentSettings_7ree.color.trim();
+                if (hasTextColor) {
+                    textColorInput.value = currentSettings_7ree.color;
+                    textColorInput.dataset.cleared = 'false';
+                } else {
+                    textColorInput.value = '#000000'; // 设置默认值避免浏览器警告
+                    textColorInput.dataset.cleared = 'true';
+                }
+                if (textColorPreview) {
+                    if (hasTextColor) {
+                        textColorPreview.style.backgroundColor = currentSettings_7ree.color;
+                        textColorPreview.style.border = '1px solid #ccc';
+                        textColorPreview.title = currentSettings_7ree.color;
+                    } else {
+                        textColorPreview.style.backgroundColor = 'transparent';
+                        textColorPreview.style.border = '1px dashed #ccc';
+                        textColorPreview.title = '使用VSCode默认文本颜色';
+                    }
+                }
             }
             if (bgColorInput) {
-                bgColorInput.value = currentSettings_7ree.backgroundColor || '#ffffff';
-                if (bgColorPreview) bgColorPreview.style.backgroundColor = bgColorInput.value;
+                const hasBgColor = currentSettings_7ree.backgroundColor && currentSettings_7ree.backgroundColor.trim();
+                if (hasBgColor) {
+                    bgColorInput.value = currentSettings_7ree.backgroundColor;
+                    bgColorInput.dataset.cleared = 'false';
+                } else {
+                    bgColorInput.value = '#ffffff'; // 设置默认值避免浏览器警告
+                    bgColorInput.dataset.cleared = 'true';
+                }
+                if (bgColorPreview) {
+                    if (hasBgColor) {
+                        bgColorPreview.style.backgroundColor = currentSettings_7ree.backgroundColor;
+                        bgColorPreview.style.border = '1px solid #ccc';
+                        bgColorPreview.title = currentSettings_7ree.backgroundColor;
+                    } else {
+                        bgColorPreview.style.backgroundColor = 'transparent';
+                        bgColorPreview.style.border = '1px dashed #ccc';
+                        bgColorPreview.title = '使用VSCode默认背景颜色';
+                    }
+                }
             }
             if (selectionBgInput) {
-                selectionBgInput.value = currentSettings_7ree.selectionBackground || '#add6ff';
-                if (selectionBgPreview) selectionBgPreview.style.backgroundColor = selectionBgInput.value;
+                const hasSelectionBg = currentSettings_7ree.selectionBackground && currentSettings_7ree.selectionBackground.trim();
+                if (hasSelectionBg) {
+                    selectionBgInput.value = currentSettings_7ree.selectionBackground;
+                    selectionBgInput.dataset.cleared = 'false';
+                } else {
+                    selectionBgInput.value = '#add6ff'; // 设置默认值避免浏览器警告
+                    selectionBgInput.dataset.cleared = 'true';
+                }
+                if (selectionBgPreview) {
+                    if (hasSelectionBg) {
+                        selectionBgPreview.style.backgroundColor = currentSettings_7ree.selectionBackground;
+                        selectionBgPreview.style.border = '1px solid #ccc';
+                        selectionBgPreview.title = currentSettings_7ree.selectionBackground;
+                    } else {
+                        selectionBgPreview.style.backgroundColor = 'transparent';
+                        selectionBgPreview.style.border = '1px dashed #ccc';
+                        selectionBgPreview.title = '使用VSCode默认选择背景色';
+                    }
+                }
             }
 
             // 高级设置
@@ -824,9 +962,30 @@
             
             if (fontFamilyInput) newSettings.fontFamily = fontFamilyInput.value.trim();
             if (fontSizeInput) newSettings.fontSize = fontSizeInput.value.trim();
-            if (textColorInput) newSettings.color = textColorInput.value;
-            if (bgColorInput) newSettings.backgroundColor = bgColorInput.value;
-            if (selectionBgInput) newSettings.selectionBackground = selectionBgInput.value;
+            if (textColorInput) {
+                // 检查是否被标记为清空
+                if (textColorInput.dataset.cleared === 'true') {
+                    newSettings.color = '';
+                } else {
+                    newSettings.color = textColorInput.value.trim();
+                }
+            }
+            if (bgColorInput) {
+                // 检查是否被标记为清空
+                if (bgColorInput.dataset.cleared === 'true') {
+                    newSettings.backgroundColor = '';
+                } else {
+                    newSettings.backgroundColor = bgColorInput.value.trim();
+                }
+            }
+            if (selectionBgInput) {
+                // 检查是否被标记为清空
+                if (selectionBgInput.dataset.cleared === 'true') {
+                    newSettings.selectionBackground = '';
+                } else {
+                    newSettings.selectionBackground = selectionBgInput.value.trim();
+                }
+            }
             if (autoSaveIntervalInput) {
                 const intervalValue = parseInt(autoSaveIntervalInput.value);
                 newSettings.autoSaveInterval = !isNaN(intervalValue) ? intervalValue : 30;
@@ -1021,25 +1180,92 @@
         _updateEditorCustomCSS: function(options) {
             // console.log('settings_api中的_updateEditorCustomCSS被调用，选项:', JSON.stringify(options));
             
+            // 获取颜色 - 只有非空值才应用
+            const bgColor = options.backgroundColor && options.backgroundColor.trim() ? options.backgroundColor.trim() : '';
+            const textColor = options.color && options.color.trim() ? options.color.trim() : '';
+            const selectionBgColor = options.selectionBackground && options.selectionBackground.trim() ? options.selectionBackground.trim() : '';
+            
+            // console.log('应用颜色 - 背景色:', bgColor, '文字颜色:', textColor, '选中背景:', selectionBgColor);
+            
+            // 如果所有颜色都为空，移除自定义样式，让VSCode使用默认主题
+            if (!bgColor && !textColor && !selectionBgColor) {
+                // console.log('所有颜色都为空，移除自定义样式，使用VSCode默认主题');
+                
+                // 移除所有自定义样式元素
+                const styleElements = [
+                    'monaco-custom-styles_7ree', 
+                    'editor-custom-styles_7ree'
+                ];
+                
+                styleElements.forEach(styleId => {
+                    const styleElement = document.getElementById(styleId);
+                    if (styleElement) {
+                        styleElement.remove();
+                        // console.log(`已移除样式元素: ${styleId}`);
+                    }
+                });
+                
+                // 清除容器的内联样式
+                const containers = [
+                    document.getElementById('editor-container'),
+                    document.getElementById('notes-container'),
+                    document.querySelector('.monaco-editor-container_7ree')
+                ];
+                
+                containers.forEach(container => {
+                    if (container) {
+                        container.style.backgroundColor = '';
+                        container.style.color = '';
+                    }
+                });
+                
+                // 触发编辑器重新布局，确保使用默认样式
+                if (editor_7ree && editor_7ree.layout) {
+                    setTimeout(() => {
+                        try {
+                            editor_7ree.layout();
+                            // console.log('触发了编辑器重新布局以恢复默认样式');
+                        } catch (e) {
+                            // console.error('触发编辑器重新布局时出错:', e);
+                        }
+                    }, 100);
+                }
+                
+                return;
+            }
+            
             // 优先设置背景色，即使编辑器尚未创建，也确保HTML元素有正确的背景色
-            if (options.backgroundColor) {
+            if (bgColor) {
                 // 直接设置容器背景色，防止闪烁
                 const editorContainer = document.getElementById('editor-container');
                 if (editorContainer) {
-                    editorContainer.style.backgroundColor = options.backgroundColor;
-                    // console.log('直接设置了editor-container的背景色:', options.backgroundColor);
+                    editorContainer.style.backgroundColor = bgColor;
+                    // console.log('直接设置了editor-container的背景色:', bgColor);
                 }
                 
                 // 设置其他相关容器的背景色
                 const notesContainer = document.getElementById('notes-container');
                 if (notesContainer) {
-                    notesContainer.style.backgroundColor = options.backgroundColor;
+                    notesContainer.style.backgroundColor = bgColor;
                 }
                 
                 const monacoEditorContainer = document.querySelector('.monaco-editor-container_7ree');
                 if (monacoEditorContainer) {
-                    monacoEditorContainer.style.backgroundColor = options.backgroundColor;
+                    monacoEditorContainer.style.backgroundColor = bgColor;
                 }
+            } else {
+                // 当背景色为空时，移除自定义背景色，让VSCode使用默认主题色
+                const containers = [
+                    document.getElementById('editor-container'),
+                    document.getElementById('notes-container'),
+                    document.querySelector('.monaco-editor-container_7ree')
+                ];
+                
+                containers.forEach(container => {
+                    if (container) {
+                        container.style.backgroundColor = '';
+                    }
+                });
             }
             
             // 检查webview.js创建的样式元素
@@ -1048,75 +1274,72 @@
                 // console.log('发现webview.js创建的样式元素，避免重复应用样式');
                 
                 // 更新webview.js创建的样式元素，而不是创建新的
-                if (options.backgroundColor || options.color || options.selectionBackground) {
+                if (bgColor || textColor || selectionBgColor) {
                     // 获取当前主题信息
                     const isDarkTheme = document.body.classList.contains('vscode-dark');
                     
-                    // 获取当前样式或默认值
-                    const bgColor = options.backgroundColor || '';
-                    const textColor = options.color || '';
-                    const selectionBgColor = options.selectionBackground || '';
-                    
                     // 如果有任何样式参数，更新已有的样式元素
-                    if (bgColor || textColor || selectionBgColor) {
-                        const cssRules = [];
-                        
-                        if (bgColor) {
-                            cssRules.push(`
-                                /* 预先设置背景色，防止闪烁 */
-                                body, html, #editor-container, .editor-wrapper, .monaco-editor-container_7ree, .notes-container_7ree {
-                                    background-color: ${bgColor} !important;
-                                }
-                                
-                                /* 增强编辑器背景色 */
-                                body .monaco-editor, 
-                                body .monaco-editor .monaco-editor-background, 
-                                body .monaco-editor-background,
-                                body .monaco-editor .margin,
-                                body .monaco-editor .margin-view-overlays,
-                                #editor-container .monaco-editor,
-                                #editor-container .monaco-editor-background,
-                                .monaco-editor .monaco-editor-background,
-                                .monaco-editor .margin-view-overlays,
-                                .monaco-editor-background {
-                                    background-color: ${bgColor} !important;
-                                }
-                                
-                                /* 确保行号边栏背景色 */
-                                body .monaco-editor .margin-view-overlays .line-numbers,
-                                #editor-container .monaco-editor .margin-view-overlays .line-numbers,
-                                .monaco-editor .margin-view-overlays .line-numbers {
-                                    background-color: ${bgColor} !important;
-                                }
-                            `);
-                        }
-                        
-                        if (textColor) {
-                            cssRules.push(`
-                                /* 文字颜色 */
-                                body .monaco-editor .lines-content,
-                                body .monaco-editor .view-line span,
-                                body .monaco-editor .view-lines,
-                                #editor-container .monaco-editor .view-line span {
-                                    color: ${textColor} !important;
-                                }
-                            `);
-                        }
-                        
-                        if (selectionBgColor) {
-                            cssRules.push(`
-                                /* 选中文本背景色 */
-                                body .monaco-editor .selected-text,
-                                #editor-container .monaco-editor .selected-text {
-                                    background-color: ${selectionBgColor} !important;
-                                }
-                            `);
-                        }
-                        
-                        // 更新样式元素的内容
-                        webviewStyleElement.textContent = cssRules.join('\n');
-                        // console.log('已更新webview.js创建的样式元素内容');
+                    const cssRules = [];
+                    
+                    if (bgColor) {
+                        cssRules.push(`
+                            /* 预先设置背景色，防止闪烁 */
+                            body, html, #editor-container, .editor-wrapper, .monaco-editor-container_7ree, .notes-container_7ree {
+                                background-color: ${bgColor} !important;
+                            }
+                            
+                            /* 增强编辑器背景色 */
+                            body .monaco-editor, 
+                            body .monaco-editor .monaco-editor-background, 
+                            body .monaco-editor-background,
+                            body .monaco-editor .margin,
+                            body .monaco-editor .margin-view-overlays,
+                            #editor-container .monaco-editor,
+                            #editor-container .monaco-editor-background,
+                            .monaco-editor .monaco-editor-background,
+                            .monaco-editor .margin-view-overlays,
+                            .monaco-editor-background {
+                                background-color: ${bgColor} !important;
+                            }
+                            
+                            /* 确保行号边栏背景色 */
+                            body .monaco-editor .margin-view-overlays .line-numbers,
+                            #editor-container .monaco-editor .margin-view-overlays .line-numbers,
+                            .monaco-editor .margin-view-overlays .line-numbers {
+                                background-color: ${bgColor} !important;
+                            }
+                        `);
                     }
+                    
+                    if (textColor) {
+                        cssRules.push(`
+                            /* 文字颜色 */
+                            body .monaco-editor .lines-content,
+                            body .monaco-editor .view-line span,
+                            body .monaco-editor .view-lines,
+                            #editor-container .monaco-editor .view-line span {
+                                color: ${textColor} !important;
+                            }
+                        `);
+                    }
+                    
+                    if (selectionBgColor) {
+                        cssRules.push(`
+                            /* 选中文本背景色 */
+                            body .monaco-editor .selected-text,
+                            #editor-container .monaco-editor .selected-text {
+                                background-color: ${selectionBgColor} !important;
+                            }
+                        `);
+                    }
+                    
+                    // 更新样式元素的内容
+                    webviewStyleElement.textContent = cssRules.join('\n');
+                    // console.log('已更新webview.js创建的样式元素内容');
+                } else {
+                    // 如果没有任何自定义颜色，移除样式元素
+                    webviewStyleElement.remove();
+                    // console.log('已移除webview.js创建的样式元素');
                 }
                 
                 // 触发编辑器重新布局以确保更改生效
@@ -1147,6 +1370,21 @@
         
         // 新增：更新Monaco编辑器样式的辅助函数
         _updateMonacoCustomStyles: function(options, styleId) {
+            // 获取颜色 - 只有非空值才应用
+            const bgColor = options.backgroundColor && options.backgroundColor.trim() ? options.backgroundColor.trim() : '';
+            const textColor = options.color && options.color.trim() ? options.color.trim() : '';
+            const selectionBgColor = options.selectionBackground && options.selectionBackground.trim() ? options.selectionBackground.trim() : '';
+            
+            // 如果所有颜色都为空，移除样式元素
+            if (!bgColor && !textColor && !selectionBgColor) {
+                const styleElement = document.getElementById(styleId);
+                if (styleElement) {
+                    styleElement.remove();
+                    // console.log(`已移除样式元素: ${styleId}，因为所有颜色都为空`);
+                }
+                return;
+            }
+            
             // 创建或获取样式元素
             let styleElement = document.getElementById(styleId);
             if (!styleElement) {
@@ -1163,17 +1401,7 @@
                 // console.log(`使用现有样式元素: ${styleId}`);
             }
             
-            // 构建更全面的CSS规则（参考webview.js的实现）
-            const isDarkTheme = document.body.classList.contains('vscode-dark');
-            
-            // 获取颜色
-            const bgColor = options.backgroundColor || '';
-            const textColor = options.color || '';
-            const selectionBgColor = options.selectionBackground || '';
-            
-            // console.log('应用颜色 - 背景色:', bgColor, '文字颜色:', textColor, '选中背景:', selectionBgColor);
-            
-            // 构建CSS - 为CSS规则增加!important和更高的优先级
+            // 构建CSS规则
             const cssRules = [];
             
             if (bgColor) {

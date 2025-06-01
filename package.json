@@ -2,7 +2,7 @@
   "name": "mynotes-joplin-7ree",
   "displayName": "备忘笔记(joplin云笔记版)",
   "description": "轻量级的VSCode笔记扩展📑支持joplin云和本地笔记。内容和状态可自动保存。",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "publisher": "7ree",
   "icon": "resources/logo_7ree.png",
   "repository": {

@@ -1,6 +1,12 @@
 # MyNotes-7ree 更新日志 🚀
 # MyNotes-7ree Changelog 🚀
 
+
+## [0.2.2]
+### ✨ 新功能 / ✨ New Features
+- Added the ability to clear text color, background color, and selection background color in the parameter configuration card (if cleared, the default colors of the current VSCode theme will be used)
+- 
+
 ## [0.2.1]
 ### ✨ 新功能 / ✨ New Features
 - 新增Joplin云笔记支持，实现多端同步
